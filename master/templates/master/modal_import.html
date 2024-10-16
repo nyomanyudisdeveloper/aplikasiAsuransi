@@ -1,0 +1,45 @@
+<div id="modal_import" class="fixed left-0 top-0 w-full h-full bg-slate-400 opacity-90 overflow-auto" hidden>
+    <div class="bg-slate-950 w-fit mx-auto mt-56 p-10 rounded-md ">
+        <div class="flex flex-row justify-end">
+            <span id="btn_close_modal_import" class="text-white cursor-pointer">X</span>
+        </div>
+        <h1 class="text-center text-white text-lg font-bold ">Import Template</h1>
+        <form 
+        class="mt-5"
+        action="{% url  target_submit  %}" 
+        method="post" 
+        enctype="multipart/form-data"
+        >
+        {% csrf_token %}
+            <input type="file"
+                title="Upload excel file"
+                id="import_file"
+                name="excel_file"
+                class="text-white cursor-pointer"
+                required="required"
+            >
+            <input type="submit"
+                id="submit_import_file"
+                value="Upload"
+                class="px-5 py-2 bg-green-300 cursor-pointer rounded-md"
+            >
+        </form>
+        <div class="mt-3">
+            <span class="text-red-600">*Please check again before upload, because it will replace all data table master</span>
+        </div>
+    </div> <!-- End modal content-->
+</div>  <!--End modal container-->
+
+<script>
+    const modal_import = document.getElementById("modal_import")
+    const btn_close_modal_import = document.getElementById("btn_close_modal_import")
+    const btn_import = document.getElementById("btn_import")
+
+    btn_import.addEventListener("click",function() {
+        modal_import.removeAttribute("hidden")
+    })
+
+    btn_close_modal_import.addEventListener("click", function() {
+        modal_import.setAttribute("hidden",true)
+    })
+</script>

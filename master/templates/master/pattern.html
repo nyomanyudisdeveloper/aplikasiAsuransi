@@ -1,0 +1,47 @@
+<!-- component -->
+<!DOCTYPE html>
+<html ">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>VergelijkDierenarts.nl</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link
+      href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    {% load static %}
+    <link
+      href="{% static 'aplikasiAsuransi/output.css' %}?v={{ timestamp }}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    {% include "master/header.html"%}
+    <div class="m-20">
+      <div class="mt-5">
+        <h1 class="text-lg font-bold">Table Pattern Master</h1>
+      </div>
+      <div class="flex-row flex justify-end">
+        <a href="{% url 'master:pattern_export_template'%}"
+          class="bg-yellow-500 px-5 py-2 rounded-md cursor-pointer border-black border-2 mr-3">
+          Export Template
+        </a>
+        <span id="btn_import"
+          class="bg-yellow-500 px-5 py-2 rounded-md cursor-pointer border-black border-2 mr-3">
+          Import Template
+        </span>
+        
+      </div> <!-- end container button -->
+      {% include "master/table.html" with list_table_detail=list_table_detail is_assumption_page=True list_table_header=list_table_header %}
+    </div>
+    {% include "master/modal_import.html" with target_submit='master:pattern_import_template' %}
+  </body>
+</html>

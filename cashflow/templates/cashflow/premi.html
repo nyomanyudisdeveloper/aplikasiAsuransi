@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      {% load static %}
+      <link
+        href="{% static 'aplikasiAsuransi/output.css' %}?v={{ timestamp }}"
+        rel="stylesheet"
+      />
+  </head>
+  <body>
+      {% include "master/header.html"%}
+      <form method="POST"
+      class="max-w-max m-auto mt-5 mb-5">
+        {% csrf_token %}
+        <div class="space-y-12">
+          <div class="border-b border-gray-900/10 pb-12">
+            <h2 class="text-4xl font-semibold leading-7 text-gray-900">
+              Create Cashflow Premi
+            </h2>
+
+            <div class="mt-5 ">
+                <label
+                  for="insurance_contract_no"
+                  name="insurance_contract_no"
+                  class="block text-sm font-medium leading-6 text-gray-900"
+                  >Insurance Contract No</label
+                >
+                <div class="mt-2 ">
+                  <select
+                    id="insurance_contract_no"
+                    name="insurance_contract_no"
+                    autocomplete="borrower-name"
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                  >
+                    {% if list_insurance_contracts %} 
+                      {% for insurance_contracts in list_insurance_contracts %}
+                          <option value="{{ insurance_contracts }}">
+                            {{ insurance_contracts.id }}
+                          </option>
+                      {% endfor %} 
+                    {% else %}
+                      <option value="null">
+                        No Insurance contract available
+                      </option>
+                    {% endif %}
+                  </select>
+                </div>
+            </div>
+            <div class="mt-5">
+              <table>
+                <tr>
+                  <td>Insurance Contract ID</td>
+                  <td id="insurance_contract_id">12314</td>
+                </tr>
+                <tr>
+                  <td>Product ID</td>
+                  <td id="product_id">12314</td>
+                </tr>
+                <tr>
+                  <td>Cohort ID</td>
+                  <td id="cohort_id">12314</td>
+                </tr>
+                <tr>
+                  <td>Cedeg Flag</td>
+                  <td id="cedeg_flg">12314</td>
+                </tr>
+                <tr>
+                  <td>Endorsement Type CD</td>
+                  <td id="endorsement_type_cd">12314</td>
+                </tr>
+                <tr>
+                  <td>Begin Cov DT</td>
+                  <td id="begin_cov_dt">12314</td>
+                </tr>
+                <tr>
+                  <td>End Cov DT</td>
+                  <td id="end_cov_dt">12314</td>
+                </tr>
+                <tr>
+                  <td>Endorsement DT</td>
+                  <td id="endorsement_dt">12314</td>
+                </tr>
+                <tr>
+                  <td>Premium Amount</td>
+                  <td id="prem_amt">12314</td>
+                </tr>
+                <tr>
+                  <td>Reporting Date</td>
+                  <td id="reporting_date">12314</td>
+                </tr>
+                <tr>
+                  <td>Periode Pembayaran</td>
+                  <td id="periode_pembayaran">12314</td>
+                </tr>
+              </table>
+            </div>
+        </div>
+        
+        {% if success_message %}
+          <div class="bg-green-400 p-4 rounded-sm">
+            <span>{{ success_message }}</span>
+          </div>
+        {% endif %}
+        
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+          <button
+            type="submit"
+            class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Create
+          </button>
+        </div>
+      </form>
+  </body>
+  <script>
+    const insurance_contract_no = document.getElementById("insurance_contract_no")
+    
+    function fill_value(){
+      const insurance_contract_value = JSON.parse(insurance_contract_no.value.replace(/'/g, '"'))
+    
+      const insurance_contract_id = document.getElementById("insurance_contract_id")
+      insurance_contract_id.innerHTML = " : "+insurance_contract_value.insurance_contract_id
+      
+      const product_id = document.getElementById("product_id")
+      product_id.innerHTML = " : "+insurance_contract_value.product_id
+
+      const cohort_id = document.getElementById("cohort_id")
+      cohort_id.innerHTML = " : "+insurance_contract_value.cohort_id
+      
+      const cedeg_flg = document.getElementById("cedeg_flg")
+      cedeg_flg.innerHTML = " : "+insurance_contract_value.cedeg_flg
+
+      const endorsement_type_cd = document.getElementById("endorsement_type_cd")
+      endorsement_type_cd.innerHTML = " : "+insurance_contract_value.endorsement_type_cd
+      
+      const begin_cov_dt = document.getElementById("begin_cov_dt")
+      begin_cov_dt.innerHTML = " : "+insurance_contract_value.begin_cov_dt
+      
+      const end_cov_dt = document.getElementById("end_cov_dt")
+      end_cov_dt.innerHTML = " : "+insurance_contract_value.end_cov_dt
+      
+      const endorsement_dt = document.getElementById("endorsement_dt")
+      endorsement_dt.innerHTML = " : "+insurance_contract_value.endorsement_dt
+
+      const prem_amt = document.getElementById("prem_amt")
+      prem_amt.innerHTML = " : "+insurance_contract_value.prem_amt
+
+      const reporting_date = document.getElementById("reporting_date")
+      reporting_date.innerHTML = " : "+insurance_contract_value.reporting_date
+
+      const periode_pembayaran = document.getElementById("periode_pembayaran")
+      periode_pembayaran.innerHTML = " : "+insurance_contract_value.periode_pembayaran
+    }
+
+    fill_value()
+
+    insurance_contract_no.addEventListener("change", function() {
+      fill_value()
+    })
+
+    
+    
+  </script>
+</html>

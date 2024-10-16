@@ -1,0 +1,8 @@
+Note Perbaikan: 
+1. Letak header filenya dimana ? 
+
+
+
+
+
+npx tailwindcss -i ./aplikasiAsuransi/static/aplikasiAsuransi/input.css -o ./aplikasiAsuransi/static/aplikasiAsuransi//output.css --watch
